@@ -7,7 +7,7 @@ import { MyCounterApp } from './counter/components/MyCounterApp'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    {/* <GifsApp/> */}
-    <MyCounterApp/>
+    <GifsApp/>
+    {/* <MyCounterApp/> */}
   </StrictMode>,
 )

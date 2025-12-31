@@ -1,20 +1,11 @@
-import React, { useState } from 'react'
+import { useCounter } from '../hooks/useCounter'
 
 export const MyCounterApp = () => {
 
-    const [counter, setCounter] = useState(5);
+   const {counter, handleAdd, handleSubstract, handleReset} =  useCounter(5); 
 
-    const handleAdd = ()=>{
-        setCounter(counter+1);
-    }
-
-    const handleSubstract = ()=>{
-        setCounter((prevState) => prevState -1);
-    }
-
-    const handleReset = ()=>{
-        setCounter((prevState)=> prevState = 5);
-    }
+//    Si fuera un arreglo seria [],
+//    Si fuera un valor primitivo es isActive
 
   return (
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>

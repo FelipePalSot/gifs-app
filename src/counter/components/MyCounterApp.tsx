@@ -1,8 +1,8 @@
-import { useCounter } from '../hooks/useCounter'
+import { useCounter } from '../hooks/useCounter';
 
 export const MyCounterApp = () => {
 
-   const {counter, handleAdd, handleSubstract, handleReset} =  useCounter(5); 
+   const {counter, handleAdd, handleSubstract, handleReset} =  useCounter(); 
 
 //    Si fuera un arreglo seria [],
 //    Si fuera un valor primitivo es isActive

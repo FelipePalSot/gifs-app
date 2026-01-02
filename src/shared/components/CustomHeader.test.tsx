@@ -8,7 +8,7 @@ describe ('CustomHeader', ()=>{
         test('should render the title correctly', ()=>{
             
             render(<CustomHeader title={title}/>);
-            screen.debug();
+            // screen.debug();
             // const customHeader =  screen.getByTestId('custom-header-title');    
             // expect(customHeader.innerHTML).toContain('Mi Titulo');
             expect(screen.getByText(title)).toBeDefined();

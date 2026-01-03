@@ -5,7 +5,12 @@ import { giphyApi } from '../api/giphy.api';
 
 export const getGifsByQuery = async(query:string): Promise<Gif[]>=> {
 
-    const response = await giphyApi<GiphyResponse>('/search',{
+    if(query.trim().length === 0){
+        return[];
+    }
+
+    try {
+        const response = await giphyApi<GiphyResponse>('/search',{
         params: {
             q:query,
             limit:10,
@@ -28,4 +33,9 @@ export const getGifsByQuery = async(query:string): Promise<Gif[]>=> {
     // fetch(`
     //     https://api.giphy.com/v1/gifs/search?api_key=SQG5Lh7IdpJ4jvbOieTHg2BmTyWD9Lp3&q=${query}&limit=10&rating=g&lang=es
     // `);
+    }catch(error){
+        console.error(error);
+        return []; //ante un error se manda un arreglo vacio
+    }
+  
 };

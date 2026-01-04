@@ -2,7 +2,7 @@
  ser llamados dentro de otro hook o 
  function component, eso se soluciona usando 'renderHook' */
 
-import { beforeEach, describe, expect, test } from "vitest";
+import { describe, expect, test } from "vitest";
 import { useCounter } from "./useCounter";
 import { act, renderHook } from "@testing-library/react";
 
@@ -32,7 +32,7 @@ import { act, renderHook } from "@testing-library/react";
         const{ result } = renderHook(()=>useCounter()); // ctrl + espaciadora
 
         act(()=>{
-            result.current.handleAdd();
+            result.current.handleAdd(); /*act(), asegura que las aserciones se ejecuten despues de que se haya re-renderizado */
         })
 
         expect(result.current.counter).toBe(11);

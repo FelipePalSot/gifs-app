@@ -27,6 +27,9 @@ describe('getGifsByQuery',()=>{
         beforeEach(()=>{
             mock.reset(); //Asi deberia funcionar 
             mock =  new AxiosMockAdapter(giphyApi);
+            /*AxiosMockAdapter sirve para simular 
+            (mockear) las respuestas de las peticiones 
+            HTTP hechas con Axios */
         });
     /**Resetea para cada test */
 

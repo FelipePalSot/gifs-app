@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, test } from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import { getGifsByQuery } from "./get-gifs-by-query.action";
 import AxiosMockAdapter from 'axios-mock-adapter'; /**npm install axios-mock-adapter 
 --save-dev (--save-dev, esto es para que sea dependecia de desarrollo nomas) */
@@ -24,22 +24,20 @@ describe('getGifsByQuery',()=>{
 
     let mock = new AxiosMockAdapter(giphyApi);
 
-    describe('getGifsByQuery'), ()=>{
-        let mock = new AxiosMockAdapter(giphyApi);
         beforeEach(()=>{
-            // mock.restore(); //Asi deberia funcionar 
+            mock.reset(); //Asi deberia funcionar 
             mock =  new AxiosMockAdapter(giphyApi);
-        })
-    }/**Resetea para cada test */
+        });
+    /**Resetea para cada test */
 
     test('should return a list of gifs',async ()=>{
        
         mock.onGet('/search').reply(200, giphySearchRespondeMock); // (status, la data que quisiera retornar)
         const gifs = await getGifsByQuery('goku');
 
-        expect (gifs.length).toBe(10);
+        expect(gifs.length).toBe(10);
 
-        gifs. forEach((gif) => {
+        gifs.forEach((gif) => {
             expect(typeof gif.id). toBe('string');
             expect(typeof gif.title).toBe('string');
             expect(typeof gif.url). toBe('string');
@@ -59,14 +57,33 @@ describe('getGifsByQuery',()=>{
 
     test('should handle error when the API returns an error', async ()=>{
        
-        mock.onGet('/search').reply(400,{
-            data:{
-                message: 'Bad Request',
-            }
-        });
+            const consoleErrorSpy = vi.spyOn(console, 'error')
+                .mockImplementation(()=>{
+                    console.log
 
-        const gifs = await getGifsByQuery('goku');
-        expect(gifs.length).toBe(0);
-        
+                    /**Cuando lo dejamos en blanco ya no aparece
+                     *  el console.error ( que es como .log)
+                     *  pero si deseamos que aparezca algo lo colocamos 
+                     *  aca o si deseamos que se ejecute un codigo lo
+                     *  ejecutamos aca, es conveniente si queremos registrar
+                     *  algo como un API
+                     *  */
+                })
+            /**Se pone un espia cuando se quiere saber si algo ha sido llamado o 
+             * en otras palabras para saber el compartamiento de algo
+             * por otro lado es un objeto ficticio es algo que se esta creando
+             */
+            mock.onGet('/search').reply(400,{
+                data:{
+                    message: 'Bad Request',
+                }
+            });
+
+            const gifs = await getGifsByQuery('goku');
+            expect(gifs.length).toBe(0);
+            expect(consoleErrorSpy).toHaveBeenCalled();
+            expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
+            expect(consoleErrorSpy).toHaveBeenCalledWith(expect.anything());
+            
     });
 });

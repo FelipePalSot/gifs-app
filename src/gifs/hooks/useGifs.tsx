@@ -39,7 +39,9 @@ export const useGifs = () => {
     
             const gifs = await getGifsByQuery(query);
     
-            console.log({gifs});
+            // console.log({gifs});
+            /* lo comente para que cuando se
+            haga pasar el test no haga mucho ruido*/
     
             setGifs(gifs);
             

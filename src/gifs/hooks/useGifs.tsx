@@ -26,6 +26,7 @@ export const useGifs = () => {
             console.log({term});
             const gifs = await getGifsByQuery(term);
             setGifs(gifs);
+            gifsCache.current[term]=gifs;
         }
     
         const handleSearch = async (query:string = ' ') =>{
@@ -35,7 +36,7 @@ export const useGifs = () => {
     
             if(previousTerms.includes(query)) return;
     
-            setPreviousTerms([query, ...previousTerms].splice(0,7));
+            setPreviousTerms([query, ...previousTerms].splice(0,8));
     
             const gifs = await getGifsByQuery(query);
     

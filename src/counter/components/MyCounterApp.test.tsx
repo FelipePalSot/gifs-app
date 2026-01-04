@@ -6,7 +6,7 @@ describe('MyCounterApp', ()=>{
     test('should render component',()=>{
         render(<MyCounterApp/>);
 
-        screen.debug();
+        // screen.debug();
 
         expect(screen.getByRole('heading',{ level:1 }).innerHTML).toContain(`counter: 10`);
         expect(screen.getByRole('button',{name:'+1'})).toBeDefined();

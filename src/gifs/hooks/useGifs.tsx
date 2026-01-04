@@ -23,7 +23,7 @@ export const useGifs = () => {
                 return;
             }
 
-            console.log({term});
+            //console.log({term});
             const gifs = await getGifsByQuery(term);
             setGifs(gifs);
             gifsCache.current[term]=gifs;

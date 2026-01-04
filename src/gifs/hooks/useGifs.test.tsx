@@ -106,7 +106,7 @@ describe('useGifs',()=>{
         getGifsByQuery, no hagas la petición real a la API, sino 
         devuelve inmediatamente un arreglo vacío []" */
 
-        console.log("desde el test en cuestion",result.current.previousTerms);
+        //console.log("desde el test en cuestion",result.current.previousTerms);
         expect(result.current.previousTerms.length).toBe(8);
         expect(result.current.previousTerms).toStrictEqual([
         'scooby 9',
